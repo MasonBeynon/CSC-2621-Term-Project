@@ -1,3 +1,5 @@
+# Dataset Card
+
 <!---
 Designed by:
 Chris Botzoc
@@ -6,25 +8,24 @@ Edited by:
 John Bukowy
 --->
 
-# Summary Information
+## Summary Information
 
-| Field             | Description                        |
-| ----------------- | ---------------------------------- |
-| Name              | predictive_maintenance_v3  |
-| Curation Date     | Synthetic  |
-| Sensitivity Level | Not Sensitive  | 
-| Summary           | Synthetically generated data for CNC machines meant for predictive maintenance and remaining useful life (RUL) estimation.  |
-| Source            | https://www.kaggle.com/datasets/tatheerabbas/industrial-machine-predictive-maintenance?resource=download  |
+| Field | Description |
+| ----------------- | --------- |
+| Name | predictive_maintenance_v3 |
+| Curation Date | N/A (Synthetic) |
+| Sensitivity Level | Not Sensitive |
+| Summary | Synthetically generated data for CNC machines meant for predictive maintenance and remaining useful life (RUL) estimation. |
+| Source | [https://www.kaggle.com/datasets/tatheerabbas/industrial-machine-predictive-maintenance?resource=download](https://www.kaggle.com/datasets/tatheerabbas/industrial-machine-predictive-maintenance?resource=download) |
 
-# Card Authors
+## Card Authors
 
 | Name | Email |
 | ---- | ---- |
-| Mason Beynon | beynonm@msoe.edu |
-| Andrew Needham | needhama@msoe.edu |
-|  |  |
+| Mason Beynon | [beynonm@msoe.edu](mailto:beynonm@msoe.edu) |
+| Andrew Needham | [needhama@msoe.edu](mailto:needhama@msoe.edu) |
 
-# Data Overview
+## Data Overview
 
 | Field | Value |
 | ---- | ---- |
@@ -33,7 +34,7 @@ John Bukowy
 | Number of Features | 15 |
 | Data Format | CSV |
 
-# Numerical Features Summary
+## Numerical Features Summary
 
 | Feature | Count | Mean | Std Dev | Min | 25% | Median | 75% | Max |
 | ------- | ----- | ---- | ------- | --- | --- | ------ | --- | --- |
@@ -47,9 +48,7 @@ John Bukowy
 | rul_hours | 24042 | 27.81 | 26.39 | 0.50 | 0.50 | 22.57 | 46.41 | 98.34 |
 | estimated_repair_cost | 24042 | 608.87 | 1566.79 | 0.00 | 0.00 | 0.00 | 0.00 | 7995.00 |
 
-
-# Categorical Features Summary
-*This sections shows the equivalent summary statistic for all categorical features in the data set*
+## Categorical Features Summary
 
 | Feature | Unique Values | Most Common Value |
 | ------- | ------------- | ----------------- |
@@ -61,7 +60,7 @@ John Bukowy
 
 Note: failure_within_24h has 14.8% 1 values.
 
-# Field Information
+## Field Information
 
 | Feature Name | Data Type | Statistical Type | Description |
 | ---- | ---- | ---- | ---- |
@@ -81,20 +80,21 @@ Note: failure_within_24h has 14.8% 1 values.
 | failure_type | string | nominal | Categorical label for the specific mode of failure (none, bearing, motor_overheat, hydraulic, electrical) |
 | estimated_repair_cost | int | continuous | Estimated cost to fix the machine based on failure type. |
 
-# Example Entry
+## Example Entry
 
 | timestamp | machine_id | machine_type | vibration_rms | temperature_motor | current_phase_avg | pressure_level | rpm | operating_mode | hours_since_maintenance | ambient_temp | rul_hours | failure_within_24h | failure_type | estimated_repair_cost |
 | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - |
 | 2024-01-01 00:00:00 | 1 | CNC | 0.81 | 49.51 | 5.1 | 23.6 | 860.9 | idle | 273.8 | 13.9 | 61.0 | 0 | none | 0 |
-| 2024-01-03 03:19:00 | 1 | CNC | 2.93 | 62.83 | 10.31 | 56.6 | 2868.7 | normal | 325.12 | 10.8 | 23.74 | 1 | hydraulic | 3403
+| 2024-01-03 03:19:00 | 1 | CNC | 2.93 | 62.83 | 10.31 | 56.6 | 2868.7 | normal | 325.12 | 10.8 | 23.74 | 1 | hydraulic | 3403 |
 
-# Exploratory Charts
+## Exploratory Charts
 
+Insert sharts *here*
 
-# Notable Feature Processing
+## Notable Feature Processing
 
 vibration_rms, temperature_motor, current_phase_avg, pressure_level, and rpm all have missing values. Missing values were imputed with medians of that feature grouped by machine id.
 
 Users should exclude failure_within_24h, failure_type, and estimated_repair_cost when training the RUL regression model to prevent data leakage. All 4 of those columns are directly correlated, failure_within_24h just being a boolean of if RUL < 24 and the other 2 being none and 0 if failure_within_24h is 0.
 
-# Notes
+## Notes
