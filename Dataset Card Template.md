@@ -7,9 +7,6 @@ John Bukowy
 --->
 
 # Summary Information
-*This describes the data set that you are going to use and what it was used for. You may choose to list models in here that used the data described in the card. The date is also important due to how data may change over time*
-
-*Dataset cards do not necessarily describe all of the data provided by a sponsor or for the project, but they should describe all data __used__ for the project*
 
 | Field             | Description                        |
 | ----------------- | ---------------------------------- |
@@ -20,7 +17,6 @@ John Bukowy
 | Source            | https://www.kaggle.com/datasets/tatheerabbas/industrial-machine-predictive-maintenance?resource=download  |
 
 # Card Authors
-*This describes the people that contributed to creating the dataset card.*
 
 | Name | Email |
 | ---- | ---- |
@@ -29,7 +25,6 @@ John Bukowy
 |  |  |
 
 # Data Overview
-*General description of the data set. Such as number of features, how large the files are, number of observations etc...*
 
 | Field | Value |
 | ---- | ---- |
@@ -39,7 +34,6 @@ John Bukowy
 | Data Format | CSV |
 
 # Numerical Features Summary
-*This sections shows the summary statistics for all numerical features in the data set*
 
 | Feature | Count | Mean | Std Dev | Min | 25% | Median | 75% | Max |
 | ------- | ----- | ---- | ------- | --- | --- | ------ | --- | --- |
@@ -68,7 +62,6 @@ John Bukowy
 Note: failure_within_24h has 14.8% 1 values.
 
 # Field Information
-*Document the table that is encoded i.e. the table they are using to build the encoding*
 
 | Feature Name | Data Type | Statistical Type | Description |
 | ---- | ---- | ---- | ---- |
@@ -89,7 +82,6 @@ Note: failure_within_24h has 14.8% 1 values.
 | estimated_repair_cost | int | continuous | Estimated cost to fix the machine based on failure type. |
 
 # Example Entry
-*It is helpful to track a few observations that you are familiar with. Pick an "average" observations as well as a few that exhibit features or classes that you are interested in. E.g. for a cancer dataset you might choose a sample that has all of the classes that you want to predict or that shows severe progression of the disease.*
 
 | timestamp | machine_id | machine_type | vibration_rms | temperature_motor | current_phase_avg | pressure_level | rpm | operating_mode | hours_since_maintenance | ambient_temp | rul_hours | failure_within_24h | failure_type | estimated_repair_cost |
 | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - |
@@ -97,15 +89,12 @@ Note: failure_within_24h has 14.8% 1 values.
 | 2024-01-03 03:19:00 | 1 | CNC | 2.93 | 62.83 | 10.31 | 56.6 | 2868.7 | normal | 325.12 | 10.8 | 23.74 | 1 | hydraulic | 3403
 
 # Exploratory Charts
-*Include a scatter plot matrix of all of your numeric features. Show bargraphs for your categorical features. If you know what response you are interested in, you might choose to make a plot of the first two principal components (from PCA or similar feature reduction algorithm) vs your known response or classes*
+
 
 # Notable Feature Processing
-*If you decide to do feature scaling or if you are doing any feature engineering, the process should go here. Remember that the mean and standard deviation of features would be important for any future applications that might use this data.* 
 
 vibration_rms, temperature_motor, current_phase_avg, pressure_level, and rpm all have missing values. Missing values were imputed with medians of that feature grouped by machine id.
 
 Users should exclude failure_within_24h, failure_type, and estimated_repair_cost when training the RUL regression model to prevent data leakage. All 4 of those columns are directly correlated, failure_within_24h just being a boolean of if RUL < 24 and the other 2 being none and 0 if failure_within_24h is 0.
 
 # Notes
-
-*document any additional considerations, concerns, or otherwise here*
