@@ -93,7 +93,7 @@ Insert sharts *here*
 
 ## Notable Feature Processing
 
-vibration_rms, temperature_motor, current_phase_avg, pressure_level, and rpm all have missing values. Missing values were imputed with medians of that feature grouped by machine id.
+vibration_rms, temperature_motor, current_phase_avg, pressure_level, and rpm all have missing values. Missing values were imputed using a KNN imputer with k=5 and distance weighting. The imputer was fit on the training set only to prevent data leakage. Since the data is synthetically generated, we have no information on why those values are missing, but it may just be random to simulate real-world scenarios. KNN imputation was chosen as it can capture complex relationships between features and is less likely to introduce bias compared to mean or median imputation.
 
 Users should exclude failure_within_24h, failure_type, and estimated_repair_cost when training the RUL regression model to prevent data leakage. All 4 of those columns are directly correlated, failure_within_24h just being a boolean of if RUL < 24 and the other 2 being none and 0 if failure_within_24h is 0.
 
