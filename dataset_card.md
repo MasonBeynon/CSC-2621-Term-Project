@@ -89,7 +89,11 @@ Note: failure_within_24h has 14.8% 1 values.
 
 ## Exploratory Charts
 
-Insert sharts *here*
+Charts of features vs RUL
+
+![](image.png)
+
+![](image-1.png)
 
 ## Notable Feature Processing
 
