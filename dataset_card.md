@@ -89,16 +89,34 @@ Note: failure_within_24h has 14.8% 1 values.
 
 ## Exploratory Charts
 
-Charts of features vs RUL
+### Histogram of numeric features
 
-![](image.png)
+![Histogram of numeric features](image.png)
 
-![](image-1.png)
+### Count plots of categorical features
+
+![Count plots of categorical features](image-1.png)
+
+### Time series plots of sensor values and numeric features over time
+
+![Time series plots](image-2.png)
+
+### PCA visualization (2 components) showing potential clustering of failure vs non-failure states
+
+![PCA visualization](image-3.png)
+
+### Scatter plots of numeric values against RUL
+
+![Scatter plots of numeric values against RUL](image-4.png)
+
+### Box plots of sensor values against failure status
+
+![Box plots of sensor values against failure status](image-5.png)
 
 ## Notable Feature Processing
 
-vibration_rms, temperature_motor, current_phase_avg, pressure_level, and rpm all have missing values. Missing values were imputed using a KNN imputer with k=5 and distance weighting. The imputer was fit on the training set only to prevent data leakage. Since the data is synthetically generated, we have no information on why those values are missing, but it may just be random to simulate real-world scenarios. KNN imputation was chosen as it can capture complex relationships between features and is less likely to introduce bias compared to mean or median imputation.
+vibration_rms, temperature_motor, current_phase_avg, pressure_level, and rpm all have missing values. Missing values were imputed using interpolation between timestamps. Data was imputed after the data was split into training and testing sets to prevent data leakage. Since the data is synthetically generated, we have no information on why those values are missing, but it may just be random to simulate real-world scenarios. We chose interpolation since the data is time-series in nature and we can reasonably assume that sensor values would lie somewhere between the last and next recorded values.
 
-Users should exclude failure_within_24h, failure_type, and estimated_repair_cost when training the RUL regression model to prevent data leakage. All 4 of those columns are directly correlated, failure_within_24h just being a boolean of if RUL < 24 and the other 2 being none and 0 if failure_within_24h is 0.
+For feature processing, we created 1-hour rolling averages for all 6 sensor features (vibration_rms, temperature_motor, current_phase_avg, pressure_level, rpm, and ambient_temp) to smooth out noise and capture underlying trends. We also created "delta per second" features by calculating the difference in each smoothed sensor value from the previous timestamp divided by the time difference in seconds. This was done to capture the average rate of change in sensor values, which could potentially be predictive of impending failure and also encode the time component of the data in a way that absolute values do not.
 
 ## Notes
